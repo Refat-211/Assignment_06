@@ -9,7 +9,7 @@ const displayCategories = categories => {
     categories.forEach(category => {
         const categoryDiv = document.createElement('div');
         categoryDiv.innerHTML = `
-            <button onclick="newsCategory(${category.category_id})" class="text-light border rounded my-1 border-primary bg-primary bg-gradient" href="">${category.category_name}</button>
+            <button onclick="newsCategory(${category.category_id})" class="border rounded my-1 border-primary btn btn-outline-primary" href="">${category.category_name}</button>
         `;
         categoryContainer.appendChild(categoryDiv);
     })
