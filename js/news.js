@@ -27,6 +27,9 @@ const displayCategories = async (categories) => {
 // News Card
 
 const loadCards = async (categoryId) => {
+// spinner
+    const spinnerContainer = document.getElementById('spinner-container')
+    spinnerContainer.classList.remove('d-none');
 
     try {
         const res = await fetch(`https://openapi.programming-hero.com/api/news/category/${categoryId}`)
@@ -51,7 +54,7 @@ const displayCards = (newsCards) => {
     showItems.innerText = newsCards.length;
 
     if(newsCards.length === 0){
-        const spinnerContainer = document.getElementById('spinner')
+        const spinnerContainer = document.getElementById('spinner-container')
         spinnerContainer.classList.add('d-none');
     }
 
@@ -70,8 +73,8 @@ const displayCards = (newsCards) => {
         const newsCardDiv = document.createElement('div');
 
 // spinner
-        const spinner = document.getElementById('spinner')
-        spinner.classList.add('d-none');
+        const spinnerContainer = document.getElementById('spinner-container')
+        spinnerContainer.classList.add('d-none');
 
         newsCardDiv.innerHTML = `
         
@@ -130,7 +133,7 @@ const modal = async (id) => {
     newsModalBody.textContent = '';
     newsModalBody.innerHTML = `
     <img class="img-fluid" src="${image_url}" alt="">
-    <h2 class="mb-3 fs-5 fw-semibold">${title ? title : "title not found"}</h2>
+    <h2 class="mb-3 mt-3 fs-5 fw-bold">${title ? title : "title not found"}</h2>
     <p class="mb-3">${details ? details : 'details not found'}</p>
     <div class="">                   
     <div class="d-flex flex-row">
@@ -143,7 +146,7 @@ const modal = async (id) => {
             </div>
         </div>
         <div class="d-flex py-2">
-            <p class="fs-5"><i class="fa-solid fs-5 fa-eye"></i> ${total_view || total_view === 0 ? total_view : "view not found"}</p>
+            <p class="fs-5 ms-1"><i class="fa-solid fs-5 fa-eye"></i> ${total_view || total_view === 0 ? total_view : "view not found"}</p>
         </div>
     </div>
 
