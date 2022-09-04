@@ -51,7 +51,13 @@ const displayCards = (newsCards) => {
     newsItems.classList.remove('d-none');
 
     const showItems = document.getElementById('show-items-numbers')
-    showItems.innerText = newsCards.length;
+    if (newsCards.length <= 0){
+        showItems.innerText = "No";
+    }
+    else{
+        showItems.innerText = newsCards.length;
+    }
+    
 
     if(newsCards.length === 0){
         const spinnerContainer = document.getElementById('spinner-container')
