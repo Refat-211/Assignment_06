@@ -92,7 +92,7 @@ const displayCards = (newsCards) => {
                                 </div>
                                 <div class="ms-2">
                                     <h6 class="mb-0">${name ? name : "name not found"}</h6>
-                                    <p>${published_date ? published_date : "published date not found"}</p>
+                                    <p>${published_date ? published_date.slice(0, 10) : "published date not found"}</p>
                                 </div>
                             </div>
                             <div class="d-flex py-2">
