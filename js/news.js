@@ -99,7 +99,7 @@ const displayCards = (newsCards) => {
                                 <p class="fs-5"><i class="fa-solid fs-5 fa-eye"></i> ${total_view || total_view === 0 ? total_view : "view not found"}</p>
                             </div>
                             <div>
-                                <button class="my-2 me-2 p-1 text-light border rounded border-primary bg-primary bg-gradient"  onclick="modal('${card._id}')">Details</button>
+                                <button onclick="modal('${card._id}')" href="#" class="my-2 me-2 p-1 text-light border rounded border-primary bg-primary bg-gradient" data-bs-toggle="modal" data-bs-target="#newsDetailModal">Details</button>
                             </div>
                         </div>
                     </div>
@@ -113,11 +113,42 @@ const displayCards = (newsCards) => {
 
 }
 
+const modal = async (id) => {
+    const url = `https://openapi.programming-hero.com/api/news/${id}`
+    let data = {};
+    try {
+        const res = await fetch(url)
+        data = await res.json()
+    }
+    catch (error) {
+        console.log(error);
+    }
 
+    const {author, title, details, image_url, total_view} = data.data[0];
 
+    const newsModalBody = document.getElementById('news-modal');
+    newsModalBody.textContent = '';
+    newsModalBody.innerHTML = `
+    <img class="img-fluid" src="${image_url}" alt="">
+    <h2 class="mb-3 fs-5 fw-semibold">${title ? title : "title not found"}</h2>
+    <p class="mb-3">${details ? details : 'details not found'}</p>
+    <div class="">                   
+    <div class="d-flex flex-row">
+        <div>
+                <img class="rounded-circle" width="40px" height="40px" src="${author.img ? author.img : "img not found"}" alt="">
+            </div>
+            <div class="ms-2">
+                <h6 class="mb-0">${author.name ? author.name : "name not found"}</h6>
+                <p>${author.published_date ? author.published_date.slice(0, 10) : "published date not found"}</p>
+            </div>
+        </div>
+        <div class="d-flex py-2">
+            <p class="fs-5"><i class="fa-solid fs-5 fa-eye"></i> ${total_view || total_view === 0 ? total_view : "view not found"}</p>
+        </div>
+    </div>
 
-
-
+    `
+}
 
 
 loadCards('01');
